@@ -1,8 +1,19 @@
-import { RenderMode, ServerRoute } from '@angular/ssr';
+import { Routes } from '@angular/router';
+import { AddTask } from './add-task/add-task';
+import { TaskList } from './task-list/task-list';
+import { Home } from './home/home';
 
-export const serverRoutes: ServerRoute[] = [
+export const routes: Routes = [
   {
-    path: '**',
-    renderMode: RenderMode.Prerender
+    path: 'add', 
+    component: AddTask
+  },
+  {
+    path: 'list',
+    component: TaskList
+  },
+  {
+    path: '',
+    component: Home
   }
 ];

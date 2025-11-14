@@ -1,0 +1,26 @@
+<h1>Tasks</h1>
+
+<div class = "page">
+@if (tasks$ | async; as tasks) {
+@if (tasks.length > 0) {
+<ul>
+    @for (t of tasks; track t.id) {
+    <li class="task">
+      <div class="task-content">
+        <h3>{{ t.name }}</h3>
+        
+        @if (t.description) {
+          <p>{{ t.description }}</p>
+        }
+        </div>
+        <button (click)="onClick(t.id)" class="delete-btn">Delete</button>
+    </li>
+    }
+</ul>
+} @else {
+<p class = "filler">No tasks today!</p>
+}
+} @else {
+<p class="filler">Loading tasks...</p>
+}
+</div>
