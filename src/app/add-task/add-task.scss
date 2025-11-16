@@ -1,16 +1,36 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  max-width: 400px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* Styles for standalone page (when used on /add route) */
+:host.standalone-page {
+  max-width: 100%;
+  width: 100%;
+  justify-content: center;
+}
+
 .add-task-container {
   text-align: center;
-  margin: 2rem auto;
+  margin: 0;
   border: 0.2rem solid;
   padding: 2rem;
-  width: fit-content;
+  width: 100%;
+  max-width: 400px;
+  flex-shrink: 0;
+  box-sizing: border-box;
   // border-radius: 20px;           /* optional – smoother look */
   // background: #f8fff0;
 }
 
 .add-task-container h2 {
   font-size: 1.8rem;
-  ;
   font-weight: bold;
 }
 

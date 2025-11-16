@@ -1,5 +1,7 @@
-import { Component, Signal, signal } from '@angular/core';
+import { Component, Signal, signal, HostBinding, inject, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task';
 
@@ -8,8 +10,13 @@ import { Task } from '../models/task';
   imports: [FormsModule],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
+  host: {'[class.standalone-page]':'isStandalonePage'}
 })
 export class AddTask {
+  private router = inject(Router);
+  
+  isStandalonePage = signal(false);
+   
   task: Task = {
     id: '',
     name: '',
@@ -21,6 +28,16 @@ export class AddTask {
 
   constructor(private taskService: TaskService) {
     this.taskService = taskService;
+    
+    // Check initial route
+    this.isStandalonePage.set(this.router.url === '/add');
+    
+    // Subscribe to route changes
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.isStandalonePage.set(this.router.url === '/add');
+      });
   }
 
   onSubmit() {

@@ -1,6 +1,52 @@
+:host {
+  flex: 1;
+  min-width: 300px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 2rem;
+  flex-shrink: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.page {
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-right: 0.5rem;
+}
+
+/* Custom scrollbar styling */
+.page::-webkit-scrollbar {
+  width: 8px;
+}
+
+.page::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.page::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 ul {
@@ -11,23 +57,51 @@ ul {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
 .task {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   border: 4px solid #ccc;
-  border-radius: 40px;
-  padding: 1rem 3rem;
+  border-radius: 20px;
+  padding: 1rem 2rem;
   margin-bottom: 0.75rem;
   background: #252525;
-  width: 80%;
+  width: 100%;
+  max-width: 100%;
   color: white;
+  box-sizing: border-box;
+  min-width: 500px; /* Set default minimum width to prevent squeezing */
 }
 
-.task-content{
-  
+.task-content {
+  flex: 1;
+  min-width: 0; /* Critical for text wrapping in flexbox */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.task-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.task-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .delete-btn{
@@ -36,8 +110,11 @@ ul {
   color: white;
   cursor: pointer;
   font-size: 1.2rem;
-  padding: 1%;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   transition: background 0.3s;
+  flex-shrink: 0; /* Prevents button from shrinking */
+  white-space: nowrap; /* Prevents button text from wrapping */
 }
 
 .delete-btn:hover {
